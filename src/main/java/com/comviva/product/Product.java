@@ -1,0 +1,31 @@
+package com.comviva.product;
+
+public class Product {
+
+	public String name;
+	public int cost;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	@Override
+	public String toString() {
+	//return  "{\"qty\":100,\"name\":\"iPad 4\"}";
+		
+	return  "{\"qty\":"+this.cost+",\"name\":"+this.cost+"\"}";
+	}
+
+}
