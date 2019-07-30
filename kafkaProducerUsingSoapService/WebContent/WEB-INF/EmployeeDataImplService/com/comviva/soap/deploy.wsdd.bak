@@ -1,0 +1,37 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmployeeDataImplService WSDL service -->
+
+  <service name="EmployeeDataImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap.comviva.com"/>
+      <parameter name="wsdlServiceElement" value="EmployeeDataImplService"/>
+      <parameter name="schemaQualified" value="http://soap.comviva.com"/>
+      <parameter name="wsdlServicePort" value="EmployeeDataImpl"/>
+      <parameter name="className" value="com.comviva.soap.EmployeeDataImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="EmployeeDataImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="insertEmployee" qname="operNS:insertEmployee" xmlns:operNS="http://soap.comviva.com" returnQName="retNS:insertEmployeeReturn" xmlns:retNS="http://soap.comviva.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:emp" xmlns:pns="http://soap.comviva.com" type="tns:Employee" xmlns:tns="http://soap.comviva.com"/>
+      </operation>
+      <parameter name="allowedMethods" value="insertEmployee"/>
+
+      <typeMapping
+        xmlns:ns="http://soap.comviva.com"
+        qname="ns:Employee"
+        type="java:com.comviva.soap.Employee"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
